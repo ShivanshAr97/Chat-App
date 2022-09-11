@@ -12,9 +12,7 @@ import {
 } from "firebase/firestore";
 import { db } from "../firebase";
 import { AuthContext } from "../context/AuthContext";
-
 const Search = () => {
-
   const [username, setUsername] = useState("");
   const [user, setUser] = useState(null);
   const [err, setErr] = useState(false);
@@ -68,23 +66,22 @@ const Search = () => {
           [combinedId + ".userInfo"]: {
             uid: currentUser.uid,
             displayName: currentUser.displayName,
-            photoURL: currentUser.photoURL
+            photoURL: currentUser.photoURL,
           },
           [combinedId + ".date"]: serverTimestamp(),
         });
       }
-    } catch (err) { }
+    } catch (err) {}
 
     setUser(null);
     setUsername("")
   };
-
   return (
-    <>
-      <div className="bg-slate-600">
-        <input className=' border-b outline-none border-white px-4 text-sm py-2 w-full bg-slate-600 text-white placeholder:text-white'
+    <div className="search">
+      <div className="searchForm">
+        <input
           type="text"
-          placeholder="&#x1F50E;&#xFE0E; Search participants ..."
+          placeholder="Find a user"
           onKeyDown={handleKey}
           onChange={(e) => setUsername(e.target.value)}
           value={username}
@@ -92,14 +89,15 @@ const Search = () => {
       </div>
       {err && <span>User not found!</span>}
       {user && (
-        <div className='flex cursor-pointer bg-slate-600 hover:bg-slate-700 p-2 border-b border-white ' onClick={handleSelect}>
-
-          <img className=' p-2 w-12 h-12 object-cover rounded-full' src={user.photoURL} alt="" />
-          <h1 className='py-3 px-1 font-bold text-white'>{user.displayName}</h1>
+        <div className="userChat" onClick={handleSelect}>
+          <img src={user.photoURL} alt="" />
+          <div className="userChatInfo">
+            <span>{user.displayName}</span>
+          </div>
         </div>
       )}
-    </>
-  )
-}
+    </div>
+  );
+};
 
-export default Search
+export default Search;

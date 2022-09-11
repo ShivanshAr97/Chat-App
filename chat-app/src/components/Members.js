@@ -1,4 +1,17 @@
-import React from 'react'
+import React, { useContext, useState } from "react";
+import {
+  collection,
+  query,
+  where,
+  getDocs,
+  setDoc,
+  doc,
+  updateDoc,
+  serverTimestamp,
+  getDoc,
+} from "firebase/firestore";
+import { db } from "../firebase";
+import { AuthContext } from "../context/AuthContext";
 import person4Img from '../images/person4Img.png'
 
 const Members = () => {

@@ -15,7 +15,6 @@ import { v4 as uuid } from "uuid";
 import { getDownloadURL, ref, uploadBytesResumable } from "firebase/storage";
 
 const Input = () => {
-
   const [text, setText] = useState("");
   const [img, setImg] = useState(null);
 
@@ -74,18 +73,30 @@ const Input = () => {
     setText("");
     setImg(null);
   };
-
   return (
-    <div className='flex'>
-      <div className=' align-middle border w-full flex'>
-        <input className=' outline-none border-none m-2 w-4/5 placeholder:text-gray-400' type="text" placeholder='Type something ...' onChange={(e) => setText(e.target.value)}
-          value={text} />
-        <div className='flex my-auto mx-2 text-gray-500 cursor-pointer'><MdOutlineAttachFile size="20px" /></div>
-        <div className='flex my-auto mx-2 text-gray-500 cursor-pointer'><AiOutlineFileImage size="20px" /></div>
-        <button className=' text-sm bg-blue-400 text-white mx-2 my-4 px-4 py-2 rounded-lg' onClick={handleSend}>Send</button>
+    <div className="input">
+      <input
+        type="text"
+        placeholder="Type something..."
+        onChange={(e) => setText(e.target.value)}
+        value={text}
+      />
+      <div className="send">
+      <div className='flex my-auto mx-2 text-gray-500 cursor-pointer'><AiOutlineFileImage size="20px"/></div>
+        <input
+          type="file"
+          style={{ display: "none" }}
+          id="file"
+          onChange={(e) => setImg(e.target.files[0])}
+        />
+        <label htmlFor="file">
+        <div className='flex my-auto mx-2 text-gray-500 cursor-pointer'><MdOutlineAttachFile size="20px"/></div>
+    
+        </label>
+        <button onClick={handleSend}>Send</button>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default Input
+export default Input;

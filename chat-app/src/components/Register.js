@@ -1,4 +1,5 @@
 import React from 'react'
+import { useNavigate, Link } from 'react-router-dom';
 import RegisterImg from '../images/registerImg.webp'
 import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
 import { auth, storage, db } from "../firebase";
@@ -7,6 +8,7 @@ import { doc, setDoc } from "firebase/firestore";
 import { ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
 
 const Register = () => {
+  const navigate = useNavigate();
   const [err, setErr] = useState(false)
   const handleSubmit = async (e) => {
     e.preventDefault()
@@ -17,40 +19,18 @@ const Register = () => {
 
 
     try {
-      const res = await createUserWithEmailAndPassword(auth, email, password)
-      .then((userCredential)=>{
-        const user = userCredential.user;
-        console.log(user)
-      })
+      //Create user
+      const res = await createUserWithEmailAndPassword(auth, email, password);
 
-      const storageRef = ref(storage, displayName);
+      //Create a unique image name
+      const date = new Date().getTime();
+      const storageRef = ref(storage, `${displayName + date}`);
 
-      // const uploadTask = uploadBytesResumable(storageRef, file);
-
-      // uploadTask.on('state_changed',
-      //   (error) => {
-      //     setErr(true)
-      //   },
-      //   () => {
-      //     getDownloadURL(uploadTask.snapshot.ref).then(async (downloadURL) => {
-      //       await updateProfile(res.user, {
-      //         displayName,
-      //         photoURL: downloadURL
-      //       });
-
-      //       await setDoc(doc(db, "users", res.user.uid), {
-      //         uid:res.user.uid,
-      //         displayName,
-      //         email,
-      //         photoURL: downloadURL
-      //       });
-      //     });
-      //   }
-      // );
-await uploadBytesResumable(storageRef, file).then(() => {
+      await uploadBytesResumable(storageRef, file).then(() => {
         getDownloadURL(storageRef).then(async (downloadURL) => {
           try {
-            await updateProfile(res.users, {
+            //Update profile
+            await updateProfile(res.user, {
               displayName,
               photoURL: downloadURL,
             });
@@ -64,20 +44,17 @@ await uploadBytesResumable(storageRef, file).then(() => {
 
             //create empty user chats on firestore
             await setDoc(doc(db, "userChats", res.user.uid), {});
+            navigate("/");
           } catch (err) {
             console.log(err);
             setErr(true);
           }
         });
       });
-
+    } catch (err) {
+      setErr(true);
     }
-    catch (err) {
-      setErr(true)
-    }
-
-
-  }
+  };
 
   return (
     <div className='flex m-8'>
@@ -97,7 +74,7 @@ await uploadBytesResumable(storageRef, file).then(() => {
             <span>Add an avatar</span>
           </label>
           <button type='submit' className="btn flex mx-auto my-4 rounded-lg border w-fit px-4 py-1 font-semibold cursor-pointer">Sign Up</button>
-          <p className='flex justify-center text-sm'>Already have an account ?<span className='flex justify-end text-sm text-blue-600 cursor-pointer'>&nbsp; Log in</span></p>
+          <p className='flex justify-center text-sm'>Already have an account ?<Link to="/login"><span className='flex justify-end text-sm text-blue-600 cursor-pointer'>&nbsp; Log in</span></Link></p>
         </form>
       </div>
     </div>
