@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useRef } from "react";
+import React, { useContext } from "react";
 import { AuthContext } from "../context/AuthContext";
 import { ChatContext } from "../context/ChatContext";
 
@@ -8,31 +8,21 @@ const Message = ({ message }) => {
   const { currentUser } = useContext(AuthContext);
   const { data } = useContext(ChatContext);
 
-  const ref = useRef();
-
-  useEffect(() => {
-    ref.current?.scrollIntoView({ behavior: "smooth" });
-  }, [message]);
-
-
   return (
-    
-      
-        <div
-          ref={ref}
-          className={`message ${message.senderId === currentUser.uid && "owner"}`}
-        >
-          <div className='flex flex-col'>
-            <img className='w-8 h-8 mx-2 rounded-full' src={
+        <div className="flex mx-1 mb-2">
+          <div className='flex flex-col my-2'>
+            <img className='w-8 h-8 mx-2 rounded-full object-cover' src={
               message.senderId === currentUser.uid
                 ? currentUser.photoURL
                 : data.user.photoURL
             } alt="" />
             <p className='text-xs flex'>Just now</p>
           </div>
-          <div className='mx-2 bg-white rounded-tl-lg rounded-br-lg h-8 align-middle'>
-            <p className='px-2 py-1 max-w-sm'>{message.text}</p>
-            {message.img && <img src={message.img} alt="" />}
+          <div className=' mx-2 px-2 my-4 flex flex-col align-bottom bg-white rounded-tl-lg rounded-br-lg'>
+            <p className=' mx-2 my-1 max-w-xl'>{message.text}</p>
+            <div>
+            {message.img && <img className="p-2 rounded-xl w-32" src={message.img} alt="" />}
+            </div>
           </div>
         </div>
   )

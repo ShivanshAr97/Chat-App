@@ -1,4 +1,5 @@
 import React from 'react'
+import { AiOutlineFileImage } from 'react-icons/ai';
 import { useNavigate, Link } from 'react-router-dom';
 import RegisterImg from '../images/registerImg.webp'
 import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
@@ -61,8 +62,8 @@ const Register = () => {
       <div className='w-1/2'>
         <img src={RegisterImg} alt="" />
       </div>
-      <div className='w-1/2'>
-        <h1 className='flex justify-center font-bold text-3xl mt-20'>Register with Us</h1>
+      <div className='w-1/2 mx-12'>
+        <h1 className='flex justify-center font-bold text-3xl mt-20 mb-8'>Register with Us</h1>
         <form onSubmit={handleSubmit}>
           {err && <span>Something Went Wrong</span>}
           <input className='flex border px-4 py-2 rounded-lg m-2 w-4/5 justify-center' type="name" placeholder='Username' required />
@@ -70,8 +71,11 @@ const Register = () => {
           <input className='flex border px-4 py-2 rounded-lg m-2 w-4/5 justify-center' type="password" placeholder='Password' required />
           <input required style={{ display: "none" }} type="file" id="file" />
           <label htmlFor="file">
-            <img src={RegisterImg} width={40} alt="" />
-            <span>Add an avatar</span>
+            <div className='flex justify-center my-4'>
+            <span><AiOutlineFileImage size="24px"/></span>
+            {/* <img src={RegisterImg} width={40} alt="" /> */}
+            <span >Add an avatar</span>
+            </div>
           </label>
           <button type='submit' className="btn flex mx-auto my-4 rounded-lg border w-fit px-4 py-1 font-semibold cursor-pointer">Sign Up</button>
           <p className='flex justify-center text-sm'>Already have an account ?<Link to="/login"><span className='flex justify-end text-sm text-blue-600 cursor-pointer'>&nbsp; Log in</span></Link></p>
