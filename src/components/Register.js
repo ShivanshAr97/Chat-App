@@ -6,6 +6,7 @@ import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
 import { auth, storage, db } from "../firebase";
 import { useState } from 'react';
 import { doc, setDoc } from "firebase/firestore";
+import { toast } from 'react-toastify';
 import { ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
 
 const Register = () => {
@@ -66,15 +67,15 @@ const Register = () => {
         <h1 className='flex justify-center font-bold text-3xl mt-20 mb-8'>Register with Us</h1>
         <form onSubmit={handleSubmit}>
           {err && <span>Something Went Wrong</span>}
-          <input className='flex border px-4 py-2 rounded-lg m-2 w-4/5 justify-center' type="name" placeholder='Username' required />
-          <input className='flex border px-4 py-2 rounded-lg m-2 w-4/5 justify-center' type="email" placeholder='Email' required />
-          <input className='flex border px-4 py-2 rounded-lg m-2 w-4/5 justify-center' type="password" placeholder='Password' required />
+          <input className='flex border-2 outline-none px-4 py-2 rounded-lg my-4 mx-12 w-4/5 justify-center' type="name" placeholder='Username' required />
+          <input className='flex border-2 outline-none px-4 py-2 rounded-lg my-4 mx-12 w-4/5 justify-center' type="email" placeholder='Email' required />
+          <input className='flex border-2 outline-none px-4 py-2 rounded-lg my-4 mx-12 w-4/5 justify-center' type="password" placeholder='Password' required />
           <input required style={{ display: "none" }} type="file" id="file" />
           <label htmlFor="file">
             <div className='flex justify-center my-4'>
             <span><AiOutlineFileImage size="24px"/></span>
             {/* <img src={RegisterImg} width={40} alt="" /> */}
-            <span >Add an avatar</span>
+            <span className=' cursor-pointer'>Add Avatar/Profile image</span>
             </div>
           </label>
           <button type='submit' className="btn flex mx-auto my-4 rounded-lg border w-fit px-4 py-1 font-semibold cursor-pointer">Sign Up</button>
