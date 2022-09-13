@@ -34,14 +34,17 @@ const Chats = () => {
     <div className="bg-slate-600">
       {Object.entries(chats)?.sort((a,b)=>b[1].date - a[1].date).map((chat) => (
         <div
-          className="flex px-2 py-4 cursor-pointer bg-slate-600 hover:bg-slate-700 border-b"
+        // bg-slate-600, bg-slate-700
+          className="flex px-2 py-4 cursor-pointer
+          bg-gradient-to-r from-[#8EC5FC] to-[#E0C3FC] hover:from-[#8EC5FC]/95 hover:to-[#E0C3FC]/95 border-b border-gray-400 
+          dark:bg-gradient-to-r dark:from-[#141E30] dark:to-[#243B55] dark:hover:from-[#141E30]/90 dark:hover:to-[##243B55]/90"
           key={chat[0]}
           onClick={() => handleSelect(chat[1].userInfo)}
         >
           <img className="w-12 h-12 rounded-full object-cover" src={chat[1].userInfo.photoURL} alt="" />
           <div className="flex flex-col px-2">
-            <span className=" font-bold text-white">{chat[1].userInfo.displayName}</span>
-            <p className=" text-sm text-white">{chat[1].lastMessage?.text}</p>
+            <span className=" font-bold dark:text-white">{chat[1].userInfo.displayName}</span>
+            <p className=" text-sm dark:text-white">{chat[1].lastMessage?.text}</p>
           </div>
         </div>
       ))}

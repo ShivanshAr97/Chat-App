@@ -16,7 +16,7 @@ const Message = ({ message }) => {
                 ? currentUser.photoURL
                 : data.user.photoURL
             } alt="" />
-            <p className='text-xs flex'>Just now</p>
+            <p className='text-xs flex dark:text-white'>Just now</p>
           </div>
           <div className=' mx-2 px-2 my-4 flex flex-col align-bottom bg-white rounded-tl-lg rounded-br-lg'>
             <p className=' mx-2 my-1 max-w-xl'>{message.text}</p>

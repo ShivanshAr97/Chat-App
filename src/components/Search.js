@@ -82,7 +82,14 @@ const Search = () => {
   return (
     <>
       <div className="">
-        <input className=' border-b outline-none border-white px-4 text-sm py-2 w-full bg-slate-600 text-white placeholder:text-white'
+        {/* bg-slate-600 */}
+        <input className=' border-b-2 border-gray-500 outline-none px-4 text-sm py-2 w-full 
+        
+        bg-gradient-to-r from-[#8EC5FC]/95 to-[#E0C3FC]/95
+        
+        dark:bg-gradient-to-r dark:from-[#141E30] dark:to-[#243B55] dark:hover:from-[#141E30]/90 dark:hover:to-[#243B55]/90
+        
+        text-black placeholder:text-black dark:text-white dark:placeholder:text-white'
           type="text"
           placeholder="&#x1F50E;&#xFE0E; Search participants ..."
           onKeyDown={handleKey}
@@ -92,10 +99,10 @@ const Search = () => {
       </div>
       {err && <span>User not found!</span>}
       {user && (
-        <div className='flex cursor-pointer bg-slate-600 hover:bg-slate-700 p-2 border-b border-white ' onClick={handleSelect}>
+        <div className='flex cursor-pointer bg-cyan-400 hover:bg-cyan-500 bg-gradient-to-r from-[#8EC5FC] to-[#E0C3FC] hover:from-[#8EC5FC]/90 hover:to-[#E0C3FC]/90 p-2 border-b' onClick={handleSelect}>
 
           <img className=' p-2 w-12 h-12 object-cover rounded-full' src={user.photoURL} alt="" />
-          <h1 className='py-3 px-1 font-bold text-white'>{user.displayName}</h1>
+          <h1 className='py-3 px-1 font-bold'>{user.displayName}</h1>
         </div>
       )}
     </>

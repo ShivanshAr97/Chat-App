@@ -77,7 +77,7 @@ const Input = () => {
 
   return (
     <div className='flex'>
-      <div className=' align-middle border w-full flex'>
+      <div className=' align-middle border-b-2 border-r-2 border-l w-full flex'>
         <input className=' outline-none border-none m-2 w-4/5 placeholder:text-gray-400' type="text" placeholder='Type something ...' onChange={(e) => setText(e.target.value)}
           value={text} />
 

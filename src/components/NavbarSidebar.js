@@ -8,7 +8,7 @@ const Navbar = () => {
   const {currentUser} = useContext(AuthContext)
 
   return (
-    <div className='flex align-middle justify-between p-2 rounded-tl-lg bg-slate-800 text-white'>
+    <div className='flex align-middle justify-between p-2 rounded-tl-lg bg-gradient-to-r from-[#000428] to-[#004e92] text-white'>
       <h1 className='px-4 py-2 font-bold'>गप-शप</h1>
       <div className='flex'>
       <img className='w-10 h-10 rounded-full object-cover' src={currentUser.photoURL} alt="" />

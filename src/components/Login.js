@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import {useNavigate, Link } from 'react-router-dom';
 import LoginImg from '../images/loginImg.png'
-import { AiOutlineGoogle, AiFillGithub, AiFillFacebook } from 'react-icons/ai';
+import { AiOutlineGoogle, AiFillGithub, AiFillFacebook, AiOutlineEye } from 'react-icons/ai';
 import { signInWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../firebase";
 
@@ -9,6 +9,15 @@ const Login = () => {
     const [err, setErr] = useState(false);
     const navigate = useNavigate();
     
+    function showPass() {
+        if (document.getElementById("passw").type="password") {
+            document.getElementById("passw").type="text"
+        }
+        else if(document.getElementById("passw").type="password") {
+        document.getElementById("passw").type="text"
+        } 
+    }
+
     const handleSubmit = async (e) => {
         console.log("Clicked ")
         navigate("/")
@@ -34,7 +43,10 @@ const Login = () => {
                 <form onSubmit={handleSubmit}>
                 {err && <span>Something Went Wrong</span>}
                     <input className='flex border-2 outline-none px-4 py-2 rounded-lg mx-12 my-4 w-4/5 justify-center' type="email" placeholder='Email' required />
-                    <input className='flex border-2 outline-none px-4 py-2 rounded-lg mx-12 my-4 w-4/5 justify-center' type="password" placeholder='Password' required />
+                    <div>
+                    <input id='passw' className='flex border-2 outline-none px-4 py-2 rounded-lg mx-12 my-4 w-4/5 justify-center' type='password' placeholder='Password' required />
+                    <span className='flex justify-end absolute right-32 top-48 cursor-pointer' onClick={showPass}><AiOutlineEye/></span>
+                    </div>
                     <p className='flex justify-end text-sm text-blue-600 cursor-pointer mx-4 -mb-4'>Forgot password ?</p>
                     <button className="btn flex mx-auto my-4 rounded-lg border w-fit px-4 py-1 font-semibold cursor-pointer">Log In</button>
                     <p className='flex justify-center text-sm'>Don't have an account ? <Link to="/register"> <span className='flex justify-end text-sm text-blue-600 cursor-pointer'>&nbsp; Sign Up</span></Link></p>

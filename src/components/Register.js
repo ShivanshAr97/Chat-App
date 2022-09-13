@@ -12,6 +12,17 @@ import { ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
 const Register = () => {
   const navigate = useNavigate();
   const [err, setErr] = useState(false)
+
+  function showPass() {
+    if (document.getElementById("passw").type="password") {
+        document.getElementById("passw").type="text"
+    }
+    else if(document.getElementById("passw").type="password") {
+    document.getElementById("passw").type="text"
+    } 
+}
+
+
   const handleSubmit = async (e) => {
     e.preventDefault()
     const displayName = e.target[0].value
@@ -21,10 +32,7 @@ const Register = () => {
 
 
     try {
-      //Create user
       const res = await createUserWithEmailAndPassword(auth, email, password);
-
-      //Create a unique image name
       const date = new Date().getTime();
       const storageRef = ref(storage, `${displayName + date}`);
 
@@ -69,13 +77,13 @@ const Register = () => {
           {err && <span>Something Went Wrong</span>}
           <input className='flex border-2 outline-none px-4 py-2 rounded-lg my-4 mx-12 w-4/5 justify-center' type="name" placeholder='Username' required />
           <input className='flex border-2 outline-none px-4 py-2 rounded-lg my-4 mx-12 w-4/5 justify-center' type="email" placeholder='Email' required />
-          <input className='flex border-2 outline-none px-4 py-2 rounded-lg my-4 mx-12 w-4/5 justify-center' type="password" placeholder='Password' required />
+          <input id="pass" className='flex border-2 outline-none px-4 py-2 rounded-lg my-4 mx-12 w-4/5 justify-center' type="password" placeholder='Password' required />
           <input required style={{ display: "none" }} type="file" id="file" />
           <label htmlFor="file">
             <div className='flex justify-center my-4'>
             <span><AiOutlineFileImage size="24px"/></span>
             {/* <img src={RegisterImg} width={40} alt="" /> */}
-            <span className=' cursor-pointer'>Add Avatar/Profile image</span>
+            <span className='cursor-pointer'>Add Avatar/Profile image</span>
             </div>
           </label>
           <button type='submit' className="btn flex mx-auto my-4 rounded-lg border w-fit px-4 py-1 font-semibold cursor-pointer">Sign Up</button>

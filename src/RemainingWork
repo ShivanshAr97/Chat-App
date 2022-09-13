@@ -1,5 +1,5 @@
-PWA
 Video Call
+Audio Call
 Register with Google, Github, Facebook
 Forgot Password
 Share option
@@ -9,4 +9,9 @@ Responsiveness
 Dark Mode
 Toastify
 SEO
+Keep logged in
 About Us + Intro section
+Group meeting
+
+
+The web app is also a PWA (Progressive Web App) which means it can function offline and will also be rendered along with other applications in your mobile or desktop
