@@ -19,7 +19,7 @@ export default function Sidebar({ visible, onClose }) {
         <>
         <NavbarSidebar />
           <Search />
-          <div className='rounded-b-lg overflow-y-auto max-h-80'>
+          <div className='rounded-b-lg overflow-y-auto max-h-[calc(100%)]'>
             <Chats />
           </div>
         </>

@@ -3,6 +3,7 @@ import { BiVideo, BiUserVoice } from 'react-icons/bi';
 import { BsBrightnessHigh,BsThreeDotsVertical } from 'react-icons/bs';
 import { AiOutlineUserAdd,AiOutlineSearch } from 'react-icons/ai';
 import { ChatContext } from "../context/ChatContext";
+import { AuthContext } from "../context/AuthContext";
 
 import Modal from "./Modal";
 import Modal2 from "./Modal2";
@@ -10,6 +11,7 @@ import Sidebar from "./Sidebar";
 const NavbarChat = () => {
     
     const { data } = useContext(ChatContext);
+    const { currentUser } = useContext(AuthContext);
 
     const [showModal, setShowModal] = useState(false)
     const [showSearch, setShowSearch] = useState(false)
@@ -35,8 +37,7 @@ const NavbarChat = () => {
     function downShow(){
         setShowDown(true)
     }
-
-
+    
     return (
         <>
             <div className='flex align-middle justify-between p-1 md:p-2 rounded-t-lg bg-gradient-to-r from-[#000428] to-[#004e92] text-white'>

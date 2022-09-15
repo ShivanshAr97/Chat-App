@@ -6,13 +6,19 @@ import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
 import { auth, storage, db } from "../firebase";
 import { useState } from 'react';
 import { doc, setDoc } from "firebase/firestore";
-import { toast } from 'react-toastify';
 import { ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
+import Avatars from "./Avatars";
 
 const Register = () => {
   const navigate = useNavigate();
   const [err, setErr] = useState(false)
-
+  const [showAvatar, setShowAvatar] = useState(false)
+  function close5() {
+    setShowAvatar(false)
+  }
+  function avatarShow() {
+    setShowAvatar(true)
+  }
   function showPass() {
     if (document.getElementById("passw").type="password") {
         document.getElementById("passw").type="text"
@@ -67,6 +73,8 @@ const Register = () => {
   };
 
   return (
+    <>
+    <Avatars onClose={close5} visible={showAvatar}/>
     <div className='flex m-8'>
       <div className='w-1/2 hidden md:block'>
         <img src={RegisterImg} alt="" />
@@ -81,9 +89,11 @@ const Register = () => {
           <input required style={{ display: "none" }} type="file" id="file" />
           <label htmlFor="file">
             <div className='flex justify-center my-4'>
+            {/* <div className='flex justify-center'> */}
             <span><AiOutlineFileImage size="24px"/></span>
-            {/* <img src={RegisterImg} width={40} alt="" /> */}
-            <span className='cursor-pointer'>Add Avatar/Profile image</span>
+            <span className='px-2 cursor-pointer'>Add Avatar</span>
+            {/* <span className='px-2 cursor-pointer' onClick={avatarShow}>Add Avatar</span> */}
+            {/* </div> */}
             </div>
           </label>
           <button type='submit' className="btn flex mx-auto my-4 rounded-lg border w-fit px-4 py-1 font-semibold cursor-pointer">Sign Up</button>
@@ -91,6 +101,7 @@ const Register = () => {
         </form>
       </div>
     </div>
+    </>
   )
 }
 
