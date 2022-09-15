@@ -68,16 +68,16 @@ const Register = () => {
 
   return (
     <div className='flex m-8'>
-      <div className='w-1/2'>
+      <div className='w-1/2 hidden md:block'>
         <img src={RegisterImg} alt="" />
       </div>
-      <div className='w-1/2 mx-12'>
-        <h1 className='flex justify-center font-bold text-3xl mt-20 mb-8'>Register with Us</h1>
+      <div className='mx-2 w-full md:w-1/2 md:mx-12'>
+        <h1 className='flex justify-center font-bold text-3xl md:mt-20 mb-8'>Register with Us</h1>
         <form onSubmit={handleSubmit}>
           {err && <span>Something Went Wrong</span>}
-          <input className='flex border-2 outline-none px-4 py-2 rounded-lg my-4 mx-12 w-4/5 justify-center' type="name" placeholder='Username' required />
-          <input className='flex border-2 outline-none px-4 py-2 rounded-lg my-4 mx-12 w-4/5 justify-center' type="email" placeholder='Email' required />
-          <input id="pass" className='flex border-2 outline-none px-4 py-2 rounded-lg my-4 mx-12 w-4/5 justify-center' type="password" placeholder='Password' required />
+          <input className='flex border-2 outline-none px-4 py-2 rounded-lg my-4 w-full md:mx-12 md:w-4/5 justify-center' type="name" placeholder='Username' required />
+          <input className='flex border-2 outline-none px-4 py-2 rounded-lg my-4 w-full md:w-4/5 md:mx-12 justify-center' type="email" placeholder='Email' required />
+          <input id="pass" className='flex border-2 outline-none px-4 py-2 rounded-lg w-full my-4 md:mx-12 md:w-4/5 justify-center' type="password" placeholder='Password' required />
           <input required style={{ display: "none" }} type="file" id="file" />
           <label htmlFor="file">
             <div className='flex justify-center my-4'>

@@ -23,7 +23,7 @@ const Messages = () => {
   console.log(messages)
 
   return (
-    <div className='h-[calc(100%-2rem)]  p-4 bg-gradient-to-r from-[#ffafbd] to-[#ffc3a0] dark:bg-gradient-to-r dark:from-[#141E30] dark:to-[#243B55] overflow-y-auto'>
+    <div className='h-[calc(100%-2rem)] md:h-[calc(100%-3rem)]  p-4 bg-gradient-to-r from-[#ffafbd] to-[#ffc3a0] dark:bg-gradient-to-r dark:from-[#141E30] dark:to-[#243B55] overflow-y-auto'>
 
       {messages.map((m) => (
         <Message message={m} key={m.id} />

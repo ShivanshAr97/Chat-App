@@ -35,13 +35,13 @@ const Chats = () => {
       {Object.entries(chats)?.sort((a,b)=>b[1].date - a[1].date).map((chat) => (
         <div
         // bg-slate-600, bg-slate-700
-          className="flex px-2 py-4 cursor-pointer
+          className="flex p-2 cursor-pointer
           bg-gradient-to-r from-[#8EC5FC] to-[#E0C3FC] hover:from-[#8EC5FC]/95 hover:to-[#E0C3FC]/95 border-b border-gray-400 
           dark:bg-gradient-to-r dark:from-[#141E30] dark:to-[#243B55] dark:hover:from-[#141E30]/90 dark:hover:to-[##243B55]/90"
           key={chat[0]}
           onClick={() => handleSelect(chat[1].userInfo)}
         >
-          <img className="w-12 h-12 rounded-full object-cover" src={chat[1].userInfo.photoURL} alt="" />
+          <img className="w-10 h-10 md:w-12 md:h-12 items-center flex rounded-full object-cover" src={chat[1].userInfo.photoURL} alt="" />
           <div className="flex flex-col px-2">
             <span className=" font-bold dark:text-white">{chat[1].userInfo.displayName}</span>
             <p className=" text-sm dark:text-white">{chat[1].lastMessage?.text}</p>

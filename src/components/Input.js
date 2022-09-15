@@ -1,6 +1,8 @@
 import React, { useContext, useState } from "react";
-import { MdOutlineAttachFile } from 'react-icons/md';
-import { AiOutlineFileImage } from 'react-icons/ai';
+// import { MdOutlineAttachFile } from 'react-icons/md';
+// import { AiOutlineFileImage,AiOutlineSend } from 'react-icons/ai';
+import { AiOutlineSend } from 'react-icons/ai';
+import { BsThreeDotsVertical } from 'react-icons/bs';
 import { AuthContext } from "../context/AuthContext";
 import { ChatContext } from "../context/ChatContext";
 import {
@@ -13,15 +15,21 @@ import {
 import { db, storage } from "../firebase";
 import { v4 as uuid } from "uuid";
 import { getDownloadURL, ref, uploadBytesResumable } from "firebase/storage";
+import Modal3 from "./Modal3";
 
 const Input = () => {
-
   const [text, setText] = useState("");
   const [img, setImg] = useState(null);
-
+  const [showBelow, setShowBelow] = useState(false)
   const { currentUser } = useContext(AuthContext);
   const { data } = useContext(ChatContext);
 
+  function close4() {
+    setShowBelow(false)
+  }
+  function belowShow() {
+    setShowBelow(true)
+  }
   const handleSend = async () => {
     if (img) {
       const storageRef = ref(storage, uuid());
@@ -76,24 +84,18 @@ const Input = () => {
   };
 
   return (
-    <div className='flex'>
+    <>
+    <Modal3 onClose={close4} visible={showBelow}/>
+    <div className='flex justify-between'>
       <div className=' align-middle border-b-2 border-r-2 border-l w-full flex'>
-        <input className=' outline-none border-none m-2 w-4/5 placeholder:text-gray-400' type="text" placeholder='Type something ...' onChange={(e) => setText(e.target.value)}
+        <input className='m-2 outline-none border-none md:m-2 placeholder:text-sm md:placeholder:text-base w-4/5  placeholder:text-gray-400' type="text" placeholder='Type something ...' onChange={(e) => setText(e.target.value)}
           value={text} />
-
-          <div className='flex my-6 mx-2 text-gray-500 cursor-pointer'><MdOutlineAttachFile size="20px" /></div>
-          <input
-            type="file"
-            style={{ display: "none" }}
-            id="file"
-            onChange={(e) => setImg(e.target.files[0])}
-          />
-          <label htmlFor="file">
-            <div className='flex my-6 mx-2 text-gray-500 cursor-pointer'><AiOutlineFileImage size="20px" /></div>
-          </label>
-          <button className=' text-sm bg-blue-400 text-white mx-2 my-4 px-4 py-2 rounded-lg' onClick={handleSend}>Send</button>
+        <span className="my-3 md:my-4 mr-2 cursor-pointer" onClick={belowShow}><BsThreeDotsVertical /></span>
+        <button className='bg-blue-400 text-white md:hidden m-1 md:mx-2 md:my-4 px-2 py-1 rounded-full md:rounded-lg' onClick={handleSend}><AiOutlineSend /></button>
+        <button className='bg-blue-400 md:mx-4 text-base font-semibold hidden md:block text-white m-1 px-4 py-2 rounded-full md:rounded-lg' onClick={handleSend}>Send</button>
       </div>
     </div>
+    </>
   )
 }
 
